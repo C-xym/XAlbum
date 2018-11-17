@@ -20,6 +20,7 @@ public class ImagePagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private PagerAdapter mPreviewPagerAdapter;
     private ArrayList<ImageData> mImageDataArrayList;
+    private int Pos;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,10 +30,14 @@ public class ImagePagerActivity extends AppCompatActivity {
 
 
         mImageDataArrayList= (ArrayList<ImageData>) getIntent().getSerializableExtra("PhotoFile");
+        Pos=(int)getIntent().getSerializableExtra("pos");
+
 
         mViewPager=(ViewPager)findViewById(R.id.activity_image_view_pager);
         mPreviewPagerAdapter = new PreviewPagerAdapter();
         mViewPager.setAdapter(mPreviewPagerAdapter);
+
+        mViewPager.setCurrentItem(Pos);
 
     }
     private class PreviewPagerAdapter extends PagerAdapter {
@@ -55,6 +60,7 @@ public class ImagePagerActivity extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+
             View galleryItemView = View.inflate(ImagePagerActivity.this, R.layout.activity_image, null);
 
             ImageView imageView=galleryItemView.findViewById(R.id.photo);

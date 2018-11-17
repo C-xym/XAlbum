@@ -55,7 +55,9 @@ public class AlbumAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        final ImageData mImageDate=mFiles.get(position);
+        ImageData mImageDate=mFiles.get(position);
+
+        final int pos=position;
 
 
         Glide.with(mContext).load(mImageDate.getmPath()).into(holder.img);
@@ -65,6 +67,7 @@ public class AlbumAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ImagePagerActivity.class);
                 intent.putExtra("PhotoFile", mFiles);//pager
+                intent.putExtra("pos",pos);
                 mContext.startActivity(intent);
             }
         });
