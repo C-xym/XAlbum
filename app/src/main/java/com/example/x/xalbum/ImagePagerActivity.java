@@ -1,10 +1,12 @@
 package com.example.x.xalbum;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ActionBarContextView;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,6 +28,7 @@ public class ImagePagerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pager);
+
 
 
 
@@ -67,7 +70,7 @@ public class ImagePagerActivity extends AppCompatActivity {
             ImageData mImageData=mImageDataArrayList.get(position);
 
             TextView textView=galleryItemView.findViewById(R.id.photo_label);
-            textView.setText(mImageData.getmLabel());
+            textView.setText(mImageData.getmName());
 
             Glide.with(ImagePagerActivity.this).load(mImageData.getmPath()).into(imageView);
 
