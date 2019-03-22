@@ -69,9 +69,6 @@ public class ImagePagerActivity extends AppCompatActivity {
             ImageView imageView=galleryItemView.findViewById(R.id.photo);
             ImageData mImageData=mImageDataArrayList.get(position);
 
-            TextView textView=galleryItemView.findViewById(R.id.photo_label);
-            textView.setText(mImageData.getmName());
-
             Glide.with(ImagePagerActivity.this).load(mImageData.getmPath()).into(imageView);
 
             container.addView(galleryItemView);

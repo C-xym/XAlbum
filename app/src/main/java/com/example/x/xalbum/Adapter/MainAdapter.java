@@ -57,6 +57,7 @@ public class MainAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.ivAlbumCover = (ImageView) convertView.findViewById(R.id.item_img);
             holder.tvDirectoryName = (TextView) convertView.findViewById(R.id.item_name);
+            holder.tvCount=(TextView)convertView.findViewById(R.id.item_count);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -66,7 +67,9 @@ public class MainAdapter extends BaseAdapter {
         Glide.with(mContext).load(mAlbum.get(0).getmPath()).into(holder.ivAlbumCover);
 
         String folderName = mAlbumList.get(position).getmTitle();
+        String folderCount= String.valueOf(mAlbumList.get(position).getmCount());
         holder.tvDirectoryName.setText(folderName);
+        holder.tvCount.setText(folderCount);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,5 +86,6 @@ public class MainAdapter extends BaseAdapter {
     private static class ViewHolder {
         ImageView ivAlbumCover;
         TextView tvDirectoryName;
+        TextView tvCount;
     }
 }
