@@ -4,12 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ImageFolder {
-    private File mFile;
+
     private long mCount;
     private String mTitle;
     private String mPath;
-
     private ArrayList<ImageData> mImageDataArrayList;
+
+    public ImageFolder(){
+
+    }
 
     public ArrayList<ImageData> getmImageDataArrayList() {
         return mImageDataArrayList;
@@ -27,17 +30,7 @@ public class ImageFolder {
         this.mPath = mPath;
     }
 
-    public ImageFolder(){
 
-    }
-
-    public File getmFile() {
-        return mFile;
-    }
-
-    public void setmFile(File mFile) {
-        this.mFile = mFile;
-    }
 
     public long getmCount() {
         return mCount;

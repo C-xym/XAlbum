@@ -13,9 +13,6 @@ import java.util.ArrayList;
 
 public class AlbumActivity extends AppCompatActivity {
 
-    private ArrayList<ImageData> mFile;
-    private AlbumAdapter mAlbumAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +23,9 @@ public class AlbumActivity extends AppCompatActivity {
 
         GridView gridView=(GridView)findViewById(R.id.img_group);
 
-        mFile= (ArrayList<ImageData>) getIntent().getSerializableExtra("ImageFiles");
+        ArrayList<ImageData> mFile = (ArrayList<ImageData>) getIntent().getSerializableExtra("ImageFiles");
 
-        mAlbumAdapter =new AlbumAdapter(AlbumActivity.this,mFile);
-
+        AlbumAdapter mAlbumAdapter = new AlbumAdapter(AlbumActivity.this, mFile);
         gridView.setAdapter(mAlbumAdapter);
         mAlbumAdapter.notifyDataSetChanged();
     }

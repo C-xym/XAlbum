@@ -16,7 +16,6 @@ import java.io.InputStreamReader;
 public class PermissionSetting {
     private static final String MARK = Build.MANUFACTURER.toLowerCase();
     private Context mContext;
-
     public PermissionSetting(Context context){this.mContext=context;}
 
     public void start() {
@@ -99,7 +98,7 @@ public class PermissionSetting {
         return packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).size() > 0;
     }
 
-    public static String getSystemProperty(String propName) {
+    private static String getSystemProperty(String propName) {
         BufferedReader input = null;
         try {
             Process p = Runtime.getRuntime().exec("getprop " + propName);

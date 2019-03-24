@@ -64,10 +64,10 @@ public class MainAdapter extends BaseAdapter {
         }
 
         final ArrayList<ImageData> mAlbum=mAlbumList.get(position).getmImageDataArrayList();
-        Glide.with(mContext).load(mAlbum.get(0).getmPath()).into(holder.ivAlbumCover);
-
         String folderName = mAlbumList.get(position).getmTitle();
         String folderCount= String.valueOf(mAlbumList.get(position).getmCount());
+
+        Glide.with(mContext).load(mAlbum.get(0).getmPath()).into(holder.ivAlbumCover);
         holder.tvDirectoryName.setText(folderName);
         holder.tvCount.setText(folderCount);
 

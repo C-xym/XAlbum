@@ -15,22 +15,9 @@ public class ImageData implements Serializable {
     private String mHeight;
     private String mWidth;
 
-    private String mLabel;//图片识别标签
-
 
     public ImageData(){
 
-        mLabel="photo";//del
-
-
-    }
-
-    public String getmLabel() {
-        return mLabel;
-    }
-
-    public void setmLabel(String mLabel) {//
-        this.mLabel = mLabel;
     }
 
     public String getmName() {
@@ -96,6 +83,5 @@ public class ImageData implements Serializable {
     public void setmWidth(String mWidth) {
         this.mWidth = mWidth;
     }
-
 
 }

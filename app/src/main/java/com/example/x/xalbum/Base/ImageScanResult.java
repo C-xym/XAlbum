@@ -89,7 +89,6 @@ public class ImageScanResult {
 
                 for(File C:FolderList){
                     ImageFolder mImageFoler=new ImageFolder();
-                    mImageFoler.setmFile(C);
                     mImageFoler.setmTitle(C.getName());
                     mImageFoler.setmPath(C.getPath());
                     albumFolderList.add(mImageFoler);

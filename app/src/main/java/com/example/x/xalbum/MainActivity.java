@@ -24,11 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainAdapter mainAdapter;
-    private List<ImageFolder> mAlbumList;//文件夹
     private ListView ItemView;
-
-    private PermissionSetting mPermissionSetting;
 
     private String[] Permissions=new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -44,25 +40,19 @@ public class MainActivity extends AppCompatActivity {
         decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);///View.SYSTEM_UI_FLAG_LAYOUT_STABLE   View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         ItemView =(ListView)findViewById(R.id.item_view);
-        /*
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1 );
-        }else{
-            openAlbum();
-        }//权限
-        */
+
         checkPermission();
     }
 
     private void checkPermission(){
         List<String> mPermissionList = new ArrayList<>();
-        for (int i = 0; i < Permissions.length; i++) {
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Permissions[i]) != PackageManager.PERMISSION_GRANTED) {
-                mPermissionList.add(Permissions[i]);
+        for (String Permission : Permissions) {
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Permission) != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(Permission);
             }
         }
         if (!mPermissionList.isEmpty()) {
-            String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
+            String[] permissions = mPermissionList.toArray(new String[0]);//将List转为数组
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
         }
         else {
@@ -71,13 +61,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {//权限
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
             case 1:
                 if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
                     openAlbum();
                 }else{
                     Toast.makeText(this,"You denied the permission",Toast.LENGTH_SHORT).show();//没有权限
+                    PermissionSetting mPermissionSetting=new PermissionSetting(MainActivity.this);
+                    mPermissionSetting.start();//跳转应用权限设置界面
                 }
                 break;
             default:
@@ -86,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void openAlbum(){
         ImageScanResult imageScanResult=new ImageScanResult(this);
-        mAlbumList=imageScanResult.getAlbumList();
-        mainAdapter =new MainAdapter(MainActivity.this,mAlbumList);
+
+        List<ImageFolder> mAlbumList = imageScanResult.getAlbumList();
+        MainAdapter mainAdapter = new MainAdapter(MainActivity.this, mAlbumList);
 
         ItemView.setAdapter(mainAdapter);
         mainAdapter.notifyDataSetChanged();

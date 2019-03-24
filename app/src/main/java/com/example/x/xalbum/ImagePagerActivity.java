@@ -1,6 +1,8 @@
 package com.example.x.xalbum;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -14,33 +16,32 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.x.xalbum.Base.ImageData;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
 public class ImagePagerActivity extends AppCompatActivity {
 
-    private ViewPager mViewPager;
-    private PagerAdapter mPreviewPagerAdapter;
     private ArrayList<ImageData> mImageDataArrayList;
-    private int Pos;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pager);
 
-
+        View decor = this.getWindow().getDecorView();
+        decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
 
         mImageDataArrayList= (ArrayList<ImageData>) getIntent().getSerializableExtra("PhotoFile");
-        Pos=(int)getIntent().getSerializableExtra("pos");
+        int pos = (int) getIntent().getSerializableExtra("pos");
 
 
-        mViewPager=(ViewPager)findViewById(R.id.activity_image_view_pager);
-        mPreviewPagerAdapter = new PreviewPagerAdapter();
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.activity_image_view_pager);
+        PagerAdapter mPreviewPagerAdapter = new PreviewPagerAdapter();
         mViewPager.setAdapter(mPreviewPagerAdapter);
 
-        mViewPager.setCurrentItem(Pos);
+        mViewPager.setCurrentItem(pos);
 
     }
     private class PreviewPagerAdapter extends PagerAdapter {
@@ -55,18 +56,19 @@ public class ImagePagerActivity extends AppCompatActivity {
 
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
             //PhotoView galleryPhotoView = (PhotoView) view.findViewById(R.id.iv_show_image);
             //galleryPhotoView.setScale(1.0f);//让图片在滑动过程中恢复回缩放操作前原图大小
             return view == object;
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
             View galleryItemView = View.inflate(ImagePagerActivity.this, R.layout.activity_image, null);
 
-            ImageView imageView=galleryItemView.findViewById(R.id.photo);
+            PhotoView imageView=galleryItemView.findViewById(R.id.photo);
             ImageData mImageData=mImageDataArrayList.get(position);
 
             Glide.with(ImagePagerActivity.this).load(mImageData.getmPath()).into(imageView);
@@ -76,7 +78,7 @@ public class ImagePagerActivity extends AppCompatActivity {
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView((View) object);
         }
     }
