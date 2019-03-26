@@ -82,6 +82,7 @@ public class MainAdapter extends BaseAdapter {
         return convertView;
     }
 
+
     //holder持有者 类
     private static class ViewHolder {
         ImageView ivAlbumCover;

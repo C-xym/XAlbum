@@ -2,7 +2,11 @@ package com.example.x.xalbum.Base;
 
 
 
+import android.util.Log;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class ImageData implements Serializable {
 
@@ -66,6 +70,11 @@ public class ImageData implements Serializable {
 
     public void setmModifiedTime(String mModifiedTime) {
         this.mModifiedTime = mModifiedTime;
+
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
+        String dateStr = dateformat.format(System.currentTimeMillis());
+        Log.i("----------------------a",dateStr);
+
     }
 
     public String getmHeight() {

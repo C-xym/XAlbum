@@ -19,14 +19,15 @@
         android:textColor="@color/app_name_color"
         android:gravity="center"/>
 
-    <GridView
-        android:id="@+id/img_group"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:verticalSpacing="2dp"
         android:horizontalSpacing="2dp"
-        android:numColumns="3"
         android:layout_margin="6dp">
-    </GridView>
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 
 </LinearLayout>

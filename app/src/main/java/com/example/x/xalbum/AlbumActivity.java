@@ -1,18 +1,24 @@
 package com.example.x.xalbum;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.GridView;
 
 import com.example.x.xalbum.Adapter.AlbumAdapter;
+import com.example.x.xalbum.Adapter.RecAlbumAdapter;
 import com.example.x.xalbum.Base.ImageData;
 
 import java.util.ArrayList;
 
 public class AlbumActivity extends AppCompatActivity {
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +27,13 @@ public class AlbumActivity extends AppCompatActivity {
         View decor = this.getWindow().getDecorView();
         decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        GridView gridView=(GridView)findViewById(R.id.img_group);
-
         ArrayList<ImageData> mFile = (ArrayList<ImageData>) getIntent().getSerializableExtra("ImageFiles");
 
-        AlbumAdapter mAlbumAdapter = new AlbumAdapter(AlbumActivity.this, mFile);
-        gridView.setAdapter(mAlbumAdapter);
-        mAlbumAdapter.notifyDataSetChanged();
+
+        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.rec);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3, OrientationHelper.VERTICAL,false));
+        recyclerView.setAdapter(new RecAlbumAdapter(AlbumActivity.this,mFile));
+
+
     }
 }
