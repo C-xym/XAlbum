@@ -77,9 +77,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openAlbum(){
-        ImageScanResult imageScanResult=new ImageScanResult(this);
 
-        List<ImageFolder> mAlbumList = imageScanResult.getAlbumList();
+        List<ImageFolder> mAlbumList = ImageScanResult.get(this).getAlbumList();
         MainAdapter mainAdapter = new MainAdapter(MainActivity.this, mAlbumList);
 
         ItemView.setAdapter(mainAdapter);

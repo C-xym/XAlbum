@@ -7,15 +7,12 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ActionBarContextView;
-
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.x.xalbum.Base.ImageData;
+import com.example.x.xalbum.Base.ImageScanResult;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
@@ -32,17 +29,16 @@ public class ImagePagerActivity extends AppCompatActivity {
         View decor = this.getWindow().getDecorView();
         decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-
-        mImageDataArrayList= (ArrayList<ImageData>) getIntent().getSerializableExtra("PhotoFile");
+        String fname=(String)getIntent().getSerializableExtra("FolderName");
         int pos = (int) getIntent().getSerializableExtra("pos");
 
+        mImageDataArrayList= ImageScanResult.get(this).getFolderList(fname);
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.activity_image_view_pager);
         PagerAdapter mPreviewPagerAdapter = new PreviewPagerAdapter();
         mViewPager.setAdapter(mPreviewPagerAdapter);
 
         mViewPager.setCurrentItem(pos);
-
     }
     private class PreviewPagerAdapter extends PagerAdapter {
 

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class ImageData implements Serializable {
@@ -13,15 +14,58 @@ public class ImageData implements Serializable {
     private String mName;
     private String mTitle;
     private String mPath;
-    private String mSize;
-    private String mAddTime;
-    private String mModifiedTime;
-    private String mHeight;
-    private String mWidth;
 
+    private int mSize;
+    private long mAddTime;
+    private long mModifiedTime;
+    private int mHeight;
+    private int mWidth;
+
+    private String AddDate;
+    private String mDateYM;
+
+    private int TYPE;
+    public static final int TYPE_IMG=0;
+    public static final int TYPE_DATE=1;
+    private int pos;
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
 
     public ImageData(){
+        TYPE=TYPE_IMG;
+    }
 
+    public ImageData(String date)
+    {
+        this.mDateYM=date;
+        this.TYPE=TYPE_DATE;
+    }
+
+
+    public int getTYPE() {
+        return TYPE;
+    }
+
+    public void setTYPE() {
+        this.TYPE = TYPE_DATE;
+    }
+
+    public void setmDateYM(String mDateYM) {
+        this.mDateYM = mDateYM;
+    }
+
+    public String getAddDate() {
+        return AddDate;
+    }
+
+    public String getmDateYM() {
+        return mDateYM;
     }
 
     public String getmName() {
@@ -48,48 +92,49 @@ public class ImageData implements Serializable {
         this.mPath = mPath;
     }
 
-    public String getmSize() {
+    public int getmSize() {
         return mSize;
     }
 
-    public void setmSize(String mSize) {
+    public void setmSize(int mSize) {
         this.mSize = mSize;
     }
 
-    public String getmAddTime() {
+    public long getmAddTime() {
         return mAddTime;
     }
 
-    public void setmAddTime(String mAddTime) {
+    public void setmAddTime(long mAddTime) {
         this.mAddTime = mAddTime;
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:MM", Locale.CHINA);
+        this.AddDate=format.format(mAddTime*1000);
+
+        this.mDateYM=AddDate.substring(0,7);
+        Log.i("--------ym",mDateYM);
     }
 
-    public String getmModifiedTime() {
+    public long getmModifiedTime() {
         return mModifiedTime;
     }
 
-    public void setmModifiedTime(String mModifiedTime) {
+    public void setmModifiedTime(long mModifiedTime) {
         this.mModifiedTime = mModifiedTime;
-
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
-        String dateStr = dateformat.format(System.currentTimeMillis());
-        Log.i("----------------------a",dateStr);
-
     }
 
-    public String getmHeight() {
+    public int getmHeight() {
         return mHeight;
     }
 
-    public void setmHeight(String mHeight) {
+    public void setmHeight(int mHeight) {
         this.mHeight = mHeight;
     }
 
-    public String getmWidth() {
+    public int getmWidth() {
         return mWidth;
     }
 
-    public void setmWidth(String mWidth) {
+    public void setmWidth(int mWidth) {
         this.mWidth = mWidth;
     }
 

@@ -63,11 +63,11 @@ public class MainAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        final ArrayList<ImageData> mAlbum=mAlbumList.get(position).getmImageDataArrayList();
-        String folderName = mAlbumList.get(position).getmTitle();
-        String folderCount= String.valueOf(mAlbumList.get(position).getmCount());
+        ImageFolder mAlbum=mAlbumList.get(position);
+        final String folderName = mAlbum.getmTitle();
+        String folderCount= String.valueOf(mAlbum.getmCount());
 
-        Glide.with(mContext).load(mAlbum.get(0).getmPath()).into(holder.ivAlbumCover);
+        Glide.with(mContext).load(mAlbum.getmImageDataArrayList().get(0).getmPath()).into(holder.ivAlbumCover);
         holder.tvDirectoryName.setText(folderName);
         holder.tvCount.setText(folderCount);
 
@@ -75,7 +75,7 @@ public class MainAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AlbumActivity.class);
-                intent.putExtra("ImageFiles",mAlbum);//final
+                intent.putExtra("FolderName",folderName);
                 mContext.startActivity(intent);
             }
         });

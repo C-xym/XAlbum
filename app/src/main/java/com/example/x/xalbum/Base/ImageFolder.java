@@ -31,7 +31,6 @@ public class ImageFolder {
     }
 
 
-
     public long getmCount() {
         return mCount;
     }
